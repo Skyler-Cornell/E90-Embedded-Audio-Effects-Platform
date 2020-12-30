@@ -702,8 +702,6 @@ Text GLabel 10200 7300 0    50   Input ~ 0
 CS_SDIN
 Text GLabel 10550 7300 2    50   Input ~ 0
 CS_SDOUT
-Wire Wire Line
-	11600 7300 11600 7250
 $Comp
 L Connector_Generic:Conn_01x02 J15
 U 1 1 634F554F
@@ -719,34 +717,6 @@ Wire Wire Line
 	10550 7300 10400 7300
 Wire Wire Line
 	10300 7300 10200 7300
-$Comp
-L Connector_Generic:Conn_01x02 J16
-U 1 1 6333A979
-P 12050 7500
-F 0 "J16" V 12100 7100 50  0000 L CNN
-F 1 "CS Power Switch Conn_01x02" V 12200 7100 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 12050 7500 50  0001 C CNN
-F 3 "~" H 12050 7500 50  0001 C CNN
-	1    12050 7500
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	12200 7300 12050 7300
-Text GLabel 12200 7300 2    50   Input ~ 0
-CS_POWER
-Wire Wire Line
-	11950 7300 11600 7300
-$Comp
-L power:+3.3V #PWR032
-U 1 1 61F92C4E
-P 11600 7250
-F 0 "#PWR032" H 11600 7100 50  0001 C CNN
-F 1 "+3.3V" H 11615 7423 50  0000 C CNN
-F 2 "" H 11600 7250 50  0001 C CNN
-F 3 "" H 11600 7250 50  0001 C CNN
-	1    11600 7250
-	1    0    0    -1  
-$EndComp
 Wire Notes Line
 	9000 3300 6500 3300
 Wire Notes Line
@@ -873,15 +843,9 @@ F 3 "~" H 15200 2250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14750 2150 15000 2150
-Wire Wire Line
-	14300 2250 15000 2250
-Wire Wire Line
 	15000 2350 15000 3050
 Wire Wire Line
 	15000 3050 14650 3050
-Wire Wire Line
-	14750 2150 14750 2500
 Wire Notes Line
 	700  2000 4200 2000
 Wire Wire Line
@@ -943,8 +907,6 @@ Wire Notes Line
 Connection ~ 10650 1400
 Wire Wire Line
 	10650 1400 10300 1400
-Text GLabel 10300 1400 0    50   Input ~ 0
-CS_POWER
 Text Notes 6500 3250 0    50   ~ 0
 Switch between onboard (CS) A/D, D/A or external PMOD unit\nJumper Vertical = CS \nJumper horizontal = PMOD
 Wire Notes Line
@@ -1208,7 +1170,6 @@ Wire Wire Line
 	14650 2650 14650 2500
 Wire Wire Line
 	14300 2250 14000 2250
-Connection ~ 14300 2250
 Wire Wire Line
 	14300 2650 14300 2250
 Wire Wire Line
@@ -2341,8 +2302,6 @@ F 6 "C18437" H 13550 5800 50  0001 C CNN "LCSC"
 	1    13550 5800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	15100 5400 15400 5400
 Connection ~ 14700 6000
 Wire Wire Line
 	14700 6000 15700 6000
@@ -2527,14 +2486,6 @@ Text GLabel 12050 5250 0    50   Input ~ 0
 CS_CLK
 Wire Notes Line
 	16350 3600 16350 6700
-Text GLabel 11500 3950 0    50   Input ~ 0
-CS_POWER
-Wire Wire Line
-	15100 5150 15700 5150
-Wire Wire Line
-	15400 5050 15700 5050
-Wire Wire Line
-	15400 5050 15400 5400
 Wire Wire Line
 	15700 5250 15700 6000
 $Comp
@@ -2717,4 +2668,53 @@ F 3 "" H 12650 5350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 12150 5550
+Wire Wire Line
+	15100 5150 15400 5150
+Wire Wire Line
+	15400 5150 15400 5050
+Wire Wire Line
+	15400 5050 15700 5050
+Wire Wire Line
+	15500 5400 15500 5150
+Wire Wire Line
+	15500 5150 15700 5150
+Wire Wire Line
+	15100 5400 15500 5400
+Wire Wire Line
+	14300 2250 14600 2250
+Wire Wire Line
+	14600 2250 14600 2150
+Wire Wire Line
+	14600 2150 15000 2150
+Connection ~ 14300 2250
+Wire Wire Line
+	14750 2500 14750 2250
+Wire Wire Line
+	14750 2250 15000 2250
+$Comp
+L power:+3.3V #PWR?
+U 1 1 603A73D3
+P 10300 1300
+F 0 "#PWR?" H 10300 1150 50  0001 C CNN
+F 1 "+3.3V" H 10315 1473 50  0000 C CNN
+F 2 "" H 10300 1300 50  0001 C CNN
+F 3 "" H 10300 1300 50  0001 C CNN
+	1    10300 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10300 1400 10300 1300
+$Comp
+L power:+3.3V #PWR?
+U 1 1 603C86EB
+P 11500 3850
+F 0 "#PWR?" H 11500 3700 50  0001 C CNN
+F 1 "+3.3V" H 11515 4023 50  0000 C CNN
+F 2 "" H 11500 3850 50  0001 C CNN
+F 3 "" H 11500 3850 50  0001 C CNN
+	1    11500 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11500 3950 11500 3850
 $EndSCHEMATC
