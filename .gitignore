@@ -21,3 +21,5 @@ fp-info-cache
 *.elf
 *.ld
 *.o
+
+*.c
