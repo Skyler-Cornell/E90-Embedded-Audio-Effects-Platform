@@ -30,8 +30,8 @@ void process(int *left_in, int *right_in, int *left_out, int *right_out)
 {
 
 
-  *right_out = right_in;
-  *left_out = left_in;
+  *right_out = *right_in;
+  *left_out = *left_in;
 
 }
 
