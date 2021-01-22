@@ -24,6 +24,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "audio_process.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -243,10 +245,8 @@ void HAL_I2SEx_TxRxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
   left_in  = (((int)rx_buf[0]<<16)|rx_buf[1])>>8;
   right_in = (((int)rx_buf[2]<<16)|rx_buf[3])>>8;
 
-
-  left_out = left_in;
-  right_out = right_in;
-
+  // does the audio processing
+  process(&left_in, &right_in, &left_out, &right_out);
 
   tx_buf[0] = (left_out>>8) & 0xFFFF;
   tx_buf[1] = left_out & 0xFFFF;
@@ -262,8 +262,8 @@ void HAL_I2SEx_TxRxCpltCallback(I2S_HandleTypeDef *hi2s)
   left_in  = (((int)rx_buf[4]<<16)|rx_buf[5])>>8;
   right_in = (((int)rx_buf[6]<<16)|rx_buf[7])>>8;
 
-  left_out = left_in;
-  right_out = right_in;
+  // does the audio processing
+  process(&left_in, &right_in, &left_out, &right_out);
 
   tx_buf[4] = (left_out>>8) & 0xFFFF;
   tx_buf[5] = left_out & 0xFFFF;
