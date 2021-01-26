@@ -15,5 +15,7 @@
 #define SAMPLE_RATE 48000
 #define SAMPLE_RATE_ACTUAL 46875
 #define BIT_DEPTH 24
+#define BLOCKSIZE 1
+#define CHANNELS 2
 
 #define PI (float)3.14159265359

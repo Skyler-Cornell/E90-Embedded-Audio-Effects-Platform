@@ -84,7 +84,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+   HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -104,6 +104,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_I2SEx_TransmitReceive_DMA(&hi2s2, tx_buf, rx_buf, 4);
+
+  process_init();
 
   /* USER CODE END 2 */
 
