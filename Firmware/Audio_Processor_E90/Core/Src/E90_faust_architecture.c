@@ -42,16 +42,17 @@ void process_init() {
 void process(int *left_in, int *right_in, int *left_out, int *right_out) {
 
   //convert 24 bit int samples (−8,388,608 to 8,388,607) to float (0 to 1) without losing precision
-  FAUSTFLOAT left_in_float = ((FAUSTFLOAT) *left_in)/8388607.0;
-  FAUSTFLOAT right_in_float = ((FAUSTFLOAT) *right_in)/8388607.0;
+  FAUSTFLOAT left_in_float = ((FAUSTFLOAT) *left_in)/8388607.0f;
+  FAUSTFLOAT right_in_float = ((FAUSTFLOAT) *right_in)/8388607.0f;
 
   inputs[0] = (FAUSTFLOAT*)&left_in_float; //inputs[0] gets pointer to left sample
   inputs[1] = (FAUSTFLOAT*)&right_in_float; //inputs[1] gets pointer to right sample
 
   computemydsp(dsp, BLOCKSIZE, inputs, outputs);
 
-  // scale up processed float to 24 bit sample range and store as an int (which truncates fractional part)
-  *left_out = (int)(*outputs[0]*8388607);
-  *right_out = (int)(*outputs[1]*8388607);
+  // scale up processed float to half of the 24 bit sample range and store as an int (which truncates fractional part)
+  //+/-4000000 is roughly half of the fullscale range and is a bit softer on the ears than the full range
+  *left_out = (int)(*outputs[0]*4000000.0f);
+  *right_out = (int)(*outputs[1]*4000000.0f);
 
 }

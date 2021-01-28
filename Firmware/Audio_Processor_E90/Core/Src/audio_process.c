@@ -1,5 +1,9 @@
 /* ------------------------------------------------------------
-name: "hslider_test"
+author: "Grame"
+copyright: "(c)GRAME 2009"
+license: "BSD"
+name: "osc"
+version: "1.0"
 Code generated with Faust 2.5.23 (https://faust.grame.fr)
 Compilation options: c, -scal -ftz 0
 ------------------------------------------------------------ */
@@ -45,10 +49,12 @@ extern "C" {
 
 typedef struct {
 
-	FAUSTFLOAT fHslider0;
-	int IOTA;
-	float fRec0[8192];
+	int iVec0[2];
 	int fSamplingFreq;
+	float fConst0;
+	float fRec2[2];
+	float fRec1[2];
+	float fRec0[2];
 
 } mydsp;
 
@@ -62,14 +68,25 @@ void deletemydsp(mydsp* dsp) {
 }
 
 //void metadatamydsp(MetaGlue* m) {
-//	m->declare(m->metaInterface, "filename", "hslider_test");
-//	m->declare(m->metaInterface, "name", "hslider_test");
+//	m->declare(m->metaInterface, "author", "Grame");
+//	m->declare(m->metaInterface, "copyright", "(c)GRAME 2009");
+//	m->declare(m->metaInterface, "filename", "osc");
+//	m->declare(m->metaInterface, "license", "BSD");
+//	m->declare(m->metaInterface, "maths.lib/author", "GRAME");
+//	m->declare(m->metaInterface, "maths.lib/copyright", "GRAME");
+//	m->declare(m->metaInterface, "maths.lib/license", "LGPL with exception");
+//	m->declare(m->metaInterface, "maths.lib/name", "Faust Math Library");
+//	m->declare(m->metaInterface, "maths.lib/version", "2.1");
+//	m->declare(m->metaInterface, "name", "osc");
+//	m->declare(m->metaInterface, "oscillators.lib/name", "Faust Oscillator Library");
+//	m->declare(m->metaInterface, "oscillators.lib/version", "0.0");
+//	m->declare(m->metaInterface, "version", "1.0");
 //}
 
 int getSampleRatemydsp(mydsp* dsp) { return dsp->fSamplingFreq; }
 
 int getNumInputsmydsp(mydsp* dsp) {
-	return 2;
+	return 0;
 
 }
 int getNumOutputsmydsp(mydsp* dsp) {
@@ -79,14 +96,6 @@ int getNumOutputsmydsp(mydsp* dsp) {
 int getInputRatemydsp(mydsp* dsp, int channel) {
 	int rate;
 	switch (channel) {
-		case 0: {
-			rate = 1;
-			break;
-		}
-		case 1: {
-			rate = 1;
-			break;
-		}
 		default: {
 			rate = -1;
 			break;
@@ -122,17 +131,42 @@ void classInitmydsp(int samplingFreq) {
 }
 
 void instanceResetUserInterfacemydsp(mydsp* dsp) {
-	dsp->fHslider0 = (FAUSTFLOAT)5000.0f;
 
 }
 
 void instanceClearmydsp(mydsp* dsp) {
-	dsp->IOTA = 0;
 	/* C99 loop */
 	{
 		int l0;
-		for (l0 = 0; (l0 < 8192); l0 = (l0 + 1)) {
-			dsp->fRec0[l0] = 0.0f;
+		for (l0 = 0; (l0 < 2); l0 = (l0 + 1)) {
+			dsp->iVec0[l0] = 0;
+
+		}
+
+	}
+	/* C99 loop */
+	{
+		int l1;
+		for (l1 = 0; (l1 < 2); l1 = (l1 + 1)) {
+			dsp->fRec2[l1] = 0.0f;
+
+		}
+
+	}
+	/* C99 loop */
+	{
+		int l2;
+		for (l2 = 0; (l2 < 2); l2 = (l2 + 1)) {
+			dsp->fRec1[l2] = 0.0f;
+
+		}
+
+	}
+	/* C99 loop */
+	{
+		int l3;
+		for (l3 = 0; (l3 < 2); l3 = (l3 + 1)) {
+			dsp->fRec0[l3] = 0.0f;
 
 		}
 
@@ -142,6 +176,7 @@ void instanceClearmydsp(mydsp* dsp) {
 
 void instanceConstantsmydsp(mydsp* dsp, int samplingFreq) {
 	dsp->fSamplingFreq = samplingFreq;
+	dsp->fConst0 = (1256.63708f / fmin(192000.0f, fmax(1.0f, (float)dsp->fSamplingFreq)));
 
 }
 
@@ -157,27 +192,28 @@ void initmydsp(mydsp* dsp, int samplingFreq) {
 }
 
 //void buildUserInterfacemydsp(mydsp* dsp, UIGlue* ui_interface) {
-//	ui_interface->openVerticalBox(ui_interface->uiInterface, "hslider_test");
-//	ui_interface->addHorizontalSlider(ui_interface->uiInterface, "delay", &dsp->fHslider0, 5000.0f, 1.0f, 7000.0f, 10.0f);
+//	ui_interface->openVerticalBox(ui_interface->uiInterface, "osc");
 //	ui_interface->closeBox(ui_interface->uiInterface);
 //
 //}
 
 void computemydsp(mydsp* dsp, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
-	FAUSTFLOAT* input0 = inputs[0];
-	FAUSTFLOAT* input1 = inputs[1];
 	FAUSTFLOAT* output0 = outputs[0];
 	FAUSTFLOAT* output1 = outputs[1];
-
-	int iSlow0 = ((int)(float)dsp->fHslider0 + 1);
 	/* C99 loop */
 	{
 		int i;
 		for (i = 0; (i < count); i = (i + 1)) {
- 			dsp->fRec0[(dsp->IOTA & 8191)] = (((0.5f * dsp->fRec0[((dsp->IOTA - iSlow0) & 8191)]) + (float)input0[i]) + (float)input1[i]);
-			output0[i] = (FAUSTFLOAT)dsp->fRec0[((dsp->IOTA - 0) & 8191)];
-			output1[i] = (FAUSTFLOAT)dsp->fRec0[((dsp->IOTA - 0) & 8191)];
-			dsp->IOTA = (dsp->IOTA + 1);
+			dsp->iVec0[0] = 1;
+			dsp->fRec2[0] = (dsp->fRec2[1] + (dsp->fConst0 * (0.0f - dsp->fRec0[1])));
+			dsp->fRec1[0] = ((dsp->fRec1[1] + (dsp->fConst0 * dsp->fRec2[0])) + (float)(1 - dsp->iVec0[1]));
+			dsp->fRec0[0] = dsp->fRec1[0];
+			output0[i] = (FAUSTFLOAT)dsp->fRec0[0];
+			output1[i] = (FAUSTFLOAT)dsp->fRec0[0];
+			dsp->iVec0[1] = dsp->iVec0[0];
+			dsp->fRec2[1] = dsp->fRec2[0];
+			dsp->fRec1[1] = dsp->fRec1[0];
+			dsp->fRec0[1] = dsp->fRec0[0];
 
 		}
 
@@ -225,8 +261,8 @@ void process(int *left_in, int *right_in, int *left_out, int *right_out) {
   computemydsp(dsp, BLOCKSIZE, inputs, outputs);
 
   // scale up processed float to 24 bit sample range and store as an int (which truncates fractional part)
-  *left_out = (int)(*outputs[0]*8388607);
-  *right_out = (int)(*outputs[1]*8388607);
+  *left_out = (int)(*outputs[0]*2000000);
+  *right_out = (int)(*outputs[1]*2000000);
 
 }
 
