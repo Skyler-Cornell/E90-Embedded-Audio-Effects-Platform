@@ -6,7 +6,7 @@ The final development platform will be a printed circuit board coupled with a C 
 I expect the project to cost approximately $300 which will cover the cost of expedited PCB manufacturing and the circuit components for at least three rounds of prototyping. 
 
 
-![alt text](https://github.com/skyler-cornell/E90/main/PCB_REV1.jpg?raw=true)
+!ImageOfPCB(https://github.com/skyler-cornell/E90/main/PCB_REV1.jpg?raw=true)
 
 TODO:
 Hardware:
