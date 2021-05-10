@@ -1,2 +1,3 @@
-audio_process.c:19:6:process_init	4	static
-audio_process.c:29:6:process	24	static
+audio_process.c:29:6:compute_BPF_coeff	40	static
+audio_process.c:44:6:compute_LPF_coeff	48	static
+audio_process.c:64:6:compute_biquad	56	static
