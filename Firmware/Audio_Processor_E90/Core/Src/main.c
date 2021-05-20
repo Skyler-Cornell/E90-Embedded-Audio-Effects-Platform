@@ -23,7 +23,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 #include "audio_process.h"
 
 /* USER CODE END Includes */
@@ -59,21 +58,11 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 
-// receive and transmit buffers (twice the size of a block see ping pong buffer architecture)
-// Every Ts one left and one right sample is xfered so 4 uint16_t 's are required as 1/2 of the buffer
-uint16_t rx_buf[8];
-uint16_t tx_buf[8];
-int left_in, right_in, left_out, right_out = 0;
 
-//biquad_t LPF_biquad1;
-biquad_t BPF_biquad;
+uint16_t rx_buf[4];
+uint16_t tx_buf[4];
+int in_sample, out_sample;
 
-uint8_t adc1_ch1_val;
-
-float F0; // cutoff starts at 500 Hz
-float Fs = 48000;
-float w0;
-float Q;
 
 /* USER CODE END PV */
 
@@ -135,7 +124,8 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
   process_init();
-  HAL_I2SEx_TransmitReceive_DMA(&hi2s2, tx_buf, rx_buf, 4);
+
+  HAL_I2SEx_TransmitReceive_DMA(&hi2s2, tx_buf, rx_buf, 2);
 
 
   /* USER CODE END 2 */
@@ -146,23 +136,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-      HAL_ADC_Start(&hadc1);
-
-      HAL_ADC_PollForConversion(&hadc1,100);
-
-      //0 to 255
-      adc1_ch1_val = 255-HAL_ADC_GetValue(&hadc1);
-
-      HAL_ADC_Stop(&hadc1);
-
-      F0 = 1000 + (adc1_ch1_val*10);
-      w0 = 2*3.14159*(F0/46875);
-      Q = 6;
-
-      compute_BPF_coeff(&BPF_biquad, w0, Q);
-
-      HAL_Delay(25);
-
+      loop();
 
 
     /* USER CODE BEGIN 3 */
@@ -609,70 +583,35 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void process_init()
-{
-  BPF_biquad.yn2 = 0;
-  BPF_biquad.yn1 = 0;
-  BPF_biquad.xn2 = 0;
-  BPF_biquad.xn1 = 0;
 
-
-  F0 = 1000; // 1500 Hz LPF cutoff;
-  w0 = 2*3.141592*(F0/46875);
-  Q = 2;
-
-  //with pot, this wil be an inital ADC reading to compute the first set of coeffs
-  //compute an initial set of coefficients to avoid Nan
-  compute_BPF_coeff(&BPF_biquad, w0, Q);
-
-}
-
-void process(int *left_in, int *right_in, int *left_out, int *right_out)
-{
-  float in = (float)*left_in;
-  float out = 0;
-
-  compute_biquad(&BPF_biquad, &in, &out);
-
-  // at 48000 Hz, it takes approx. 200 ms to increase knob_counter by 10000
-  //knob_counter ++;
-
-  //output
-  *left_out = (int)out;
-  *right_out = *left_out;
-
-}
 //I2S RX line DMA transfer half complete callback
 void HAL_I2SEx_TxRxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
-  //shift right by 8 to right justify the 24 bit sample that had been xfered on a 32 bit frame
-  left_in  = (((int)rx_buf[0]<<16)|rx_buf[1])>>8;
-  right_in = (((int)rx_buf[2]<<16)|rx_buf[3])>>8;
+  //retrieve sample from rx_buf
+  in_sample  = (((int)rx_buf[0]<<16)|rx_buf[1])>>8;
 
-  // does the audio processing
-  process(&left_in, &right_in, &left_out, &right_out);
+  // do audio processing
+  process(&in_sample, &out_sample);
 
-  tx_buf[0] = (left_out>>8) & 0xFFFF;
-  tx_buf[1] = left_out & 0xFFFF;
-  tx_buf[2] = (right_out>>8) & 0xFFFF;
-  tx_buf[3] = right_out & 0xFFFF;
+  //place processed sample into tx_buf
+  tx_buf[0] = (out_sample>>8) & 0xFFFF;
+  tx_buf[1] = out_sample & 0xFFFF;
+
 
 }
 
 //I2S RX line DMA transfer complete callback
 void HAL_I2SEx_TxRxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
-  //shift right by 8 to right justify the 24 bit sample that had been xfered on a 32 bit frame
-  left_in  = (((int)rx_buf[4]<<16)|rx_buf[5])>>8;
-  right_in = (((int)rx_buf[6]<<16)|rx_buf[7])>>8;
+  //retrieve sample from rx_buf
+  in_sample  = (((int)rx_buf[2]<<16)|rx_buf[3])>>8;
 
-  // does the audio processing
-  process(&left_in, &right_in, &left_out, &right_out);
+  // does audio processing
+  process(&in_sample, &out_sample);
 
-  tx_buf[4] = (left_out>>8) & 0xFFFF;
-  tx_buf[5] = left_out & 0xFFFF;
-  tx_buf[6] = (right_out>>8) & 0xFFFF;
-  tx_buf[7] = right_out & 0xFFFF;
+  //place processed sample into tx_buf
+  tx_buf[2] = (out_sample>>8) & 0xFFFF;
+  tx_buf[3] = out_sample & 0xFFFF;
 
 }
 
