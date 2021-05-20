@@ -13,5 +13,19 @@
 #endif /* INC_AUDIO_PROCESS_H_ */
 
 
+/*
+ * Executes once before audio stream starts
+ */
 void process_init();
-void process(int *left_in, int *right_in, int *left_out, int *right_out);
+
+/*
+ * Called once per while(1) loop
+ */
+void loop();
+
+/*
+ * Main DSP routine, called each sample period
+ */
+void process(int *in_sample, int *out_sample);
+
+

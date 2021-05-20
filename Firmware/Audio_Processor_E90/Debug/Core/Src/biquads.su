@@ -1,0 +1,2 @@
+biquads.c:12:6:compute_BPF_coeff	40	static
+biquads.c:28:6:compute_biquad	48	static
