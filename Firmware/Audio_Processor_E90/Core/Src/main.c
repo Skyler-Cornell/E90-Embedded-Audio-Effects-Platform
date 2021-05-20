@@ -59,8 +59,11 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 /* USER CODE BEGIN PV */
 
 
+// global double buffer arrays
 uint16_t rx_buf[4];
 uint16_t tx_buf[4];
+
+// samples for processing
 int in_sample, out_sample;
 
 

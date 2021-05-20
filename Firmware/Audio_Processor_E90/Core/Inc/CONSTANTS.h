@@ -12,8 +12,8 @@
 
 #endif /* INC_CONSTANTS_H_ */
 
-#define SAMPLE_RATE 48000
-#define SAMPLE_RATE_ACTUAL 46875
+#define SAMPLE_RATE 48000 	 // Nominal sample rate
+#define SAMPLE_RATE_ACTUAL 46875 //actual sample rate
 #define BIT_DEPTH 24
 
 #define PI (float)3.14159265359
