@@ -1,0 +1,2 @@
+user_controls.c:20:6:update_LED	16	static
+user_controls.c:32:6:init_LEDs	8	static

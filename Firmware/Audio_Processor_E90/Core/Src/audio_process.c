@@ -7,24 +7,35 @@
 
 
 #include "audio_process.h"
+#include "user_controls.h"
 #include <math.h>
 #include "CONSTANTS.h"
 
+
+extern RGB_LED_t LED1;
+extern RGB_LED_t LED2;
+extern RGB_LED_t LED3;
+
+volatile int i;
 /*
  * Declare global variables and structures units here
  */
 
 
 
-
 void process_init()
 {
   // initialize data structures
+  init_LEDs();
 }
 
 void loop() {
 
    // manage user controls here (LEDs, Pots)
+  //update_LED(&LED1, 0,0,0);
+  //update_LED(&LED2, 0,0,0);
+  //update_LED(&LED3, 255,0,200);
+
 }
 
 void process(int *in_sample, int *out_sample)
@@ -32,6 +43,11 @@ void process(int *in_sample, int *out_sample)
 
   // passthru
   *out_sample = *in_sample;
+  if (*in_sample > 2000000 || *in_sample < -2000000 ) {
+       update_LED(&LED1, 255,0,0);
+       update_LED(&LED2, 255,0,0);
+       update_LED(&LED3, 255,0,0);
+  }
 
 }
 
