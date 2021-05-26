@@ -1,2 +1,3 @@
-audio_process.c:19:6:process_init	4	static
-audio_process.c:29:6:process	24	static
+audio_process.c:27:6:process_init	8	static
+audio_process.c:34:6:loop	8	static
+audio_process.c:44:6:process	16	static

@@ -164,15 +164,6 @@
 		<project id="Audio_Processor_E90.null.1343572584" name="Audio_Processor_E90"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1388881934;com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1388881934.;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1282815123;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1164294001">
-			<autodiscovery enabled="false" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.1732790411;com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.1732790411.;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1651028412;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.523789035">
-			<autodiscovery enabled="false" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/Audio_Processor_E90"/>
@@ -181,4 +172,6 @@
 			<resource resourceType="PROJECT" workspacePath="/Audio_Processor_E90"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="scannerConfiguration"/>
+	<storageModule moduleId="org.eclipse.cdt.core.pathentry"/>
 </cproject>
