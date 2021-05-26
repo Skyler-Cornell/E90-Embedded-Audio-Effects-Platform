@@ -8,3 +8,4 @@ The board supports stereo 24bit audio at 48kHz sampling and implements a highly 
 ![](Hardware.png)
 
 
+
