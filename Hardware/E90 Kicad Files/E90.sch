@@ -1916,42 +1916,6 @@ USB_D+
 Wire Wire Line
 	1550 15350 1500 15350
 Wire Wire Line
-	2500 12150 2350 12150
-Wire Wire Line
-	2500 12350 2350 12350
-$Comp
-L Connector_Generic:Conn_01x03 J6
-U 1 1 61089AAA
-P 2150 12250
-F 0 "J6" H 2068 11925 50  0000 C CNN
-F 1 "Conn_01x03" H 2068 12016 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 2150 12250 50  0001 C CNN
-F 3 "~" H 2150 12250 50  0001 C CNN
-	1    2150 12250
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	2500 12250 2350 12250
-Text Notes 1800 12250 0    50   ~ 0
-GPIO
-$Comp
-L Connector_Generic:Conn_01x02 J5
-U 1 1 610A99ED
-P 4600 11050
-F 0 "J5" H 4680 11042 50  0000 L CNN
-F 1 "Conn_01x02" H 4680 10951 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4600 11050 50  0001 C CNN
-F 3 "~" H 4600 11050 50  0001 C CNN
-	1    4600 11050
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4400 11050 4300 11050
-Wire Wire Line
-	4400 11150 4300 11150
-Text Notes 4850 11050 0    50   ~ 0
-I2C
-Wire Wire Line
 	15900 13900 15750 13900
 Text GLabel 15900 13900 2    50   Input ~ 0
 ANALOG_IN
@@ -2605,4 +2569,28 @@ Wire Wire Line
 Connection ~ 14600 13350
 Wire Wire Line
 	14600 13350 14600 13500
+NoConn ~ 4300 11050
+NoConn ~ 4300 11150
+NoConn ~ 2500 12150
+NoConn ~ 2500 12250
+NoConn ~ 2500 12350
+$Comp
+L E90_Embedded_DSP:WM8731SEDS_RV IC?
+U 1 1 62D482B7
+P 9650 5750
+F 0 "IC?" H 10350 6015 50  0000 C CNN
+F 1 "WM8731SEDS_RV" H 10350 5924 50  0000 C CNN
+F 2 "SOP65P780X200-28N" H 10900 5850 50  0001 L CNN
+F 3 "https://d3uzseaevmutz1.cloudfront.net/pubs/proDatasheet/WM8731_v4.9.pdf" H 10900 5750 50  0001 L CNN
+F 4 "WOLFSON MICROELECTRONICS - WM8731SEDS/RV - DAC, AUDIO, 24BIT, HEADPHONE, 28SSOP" H 10900 5650 50  0001 L CNN "Description"
+F 5 "2" H 10900 5550 50  0001 L CNN "Height"
+F 6 "WOLFSON MICROELECTRONICS" H 10900 5450 50  0001 L CNN "Manufacturer_Name"
+F 7 "WM8731SEDS/RV" H 10900 5350 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "" H 10900 5250 50  0001 L CNN "Mouser Part Number"
+F 9 "" H 10900 5150 50  0001 L CNN "Mouser Price/Stock"
+F 10 "" H 10900 5050 50  0001 L CNN "Arrow Part Number"
+F 11 "" H 10900 4950 50  0001 L CNN "Arrow Price/Stock"
+	1    9650 5750
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
