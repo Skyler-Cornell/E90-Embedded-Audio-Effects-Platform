@@ -1148,7 +1148,7 @@ F 1 "10k" H 11300 14200 50  0000 R CNN
 F 2 "Potentiometer_THT:Potentiometer_Bourns_PTV09A-1_Single_Vertical" H 11350 14200 50  0001 C CNN
 F 3 "~" H 11350 14200 50  0001 C CNN
 	1    11350 14200
-	1    0    0    1   
+	1    0    0    -1  
 $EndComp
 $Comp
 L Device:C_Small C11
@@ -1480,7 +1480,7 @@ Wire Wire Line
 Wire Wire Line
 	14500 13200 14600 13200
 Wire Wire Line
-	14600 13200 14600 13500
+	14600 13200 14600 13350
 Wire Wire Line
 	10150 14300 10150 14350
 Wire Wire Line
@@ -1879,8 +1879,6 @@ F 4 "C7519" H 2050 15250 50  0001 C CNN "LCSC"
 	1    2050 15250
 	1    0    0    -1  
 $EndComp
-Wire Notes Line
-	5400 10000 5400 10900
 $Comp
 L power:+5V #PWR048
 U 1 1 60EECDAD
@@ -2493,13 +2491,6 @@ Wire Wire Line
 Connection ~ 7600 1500
 Wire Wire Line
 	7600 1500 7600 1550
-Connection ~ 14600 13200
-Wire Wire Line
-	14350 13050 14350 13000
-Wire Wire Line
-	14600 13000 14600 13200
-Wire Wire Line
-	14350 13000 14600 13000
 Text Notes 12450 12950 0    50   ~ 0
 U3A Unused
 $Comp
@@ -2511,10 +2502,8 @@ F 1 "100k" V 14146 13200 50  0000 C CNN
 F 2 "Potentiometer_THT:Potentiometer_Piher_PT-10-V10_Vertical" H 14350 13200 50  0001 C CNN
 F 3 "~" H 14350 13200 50  0001 C CNN
 	1    14350 13200
-	0    -1   -1   0   
+	0    1    1    0   
 $EndComp
-Text Notes 13950 13050 0    50   ~ 0
-assumes CW 2->3\n\n
 Wire Notes Line
 	5350 11150 7400 11150
 Wire Notes Line
@@ -2611,4 +2600,9 @@ F 7 "CUI Devices" H 8450 14850 50  0001 L BNN "MANUFACTURER"
 	1    8900 15550
 	-1   0    0    1   
 $EndComp
+Wire Wire Line
+	14350 13350 14600 13350
+Connection ~ 14600 13350
+Wire Wire Line
+	14600 13350 14600 13500
 $EndSCHEMATC
