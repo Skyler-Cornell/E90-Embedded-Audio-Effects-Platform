@@ -68,6 +68,9 @@ int in_sample, out_sample;
 
 //ADC pot values
 uint32_t adc_buf[3], POT_1, POT_2, POT_3;
+volatile int i;
+
+char delay[127664];
 
 /* USER CODE END PV */
 
@@ -142,8 +145,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
-    loop(); //DEFINED IN audio_process.c
 
     /* USER CODE BEGIN 3 */
   }
@@ -555,8 +556,8 @@ static void MX_DMA_Init(void)
   HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
   /* DMA1_Stream4_IRQn interrupt configuration */
-  //HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);
-  //HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
+  HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
   /* DMA2_Stream0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
